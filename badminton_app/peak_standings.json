@@ -1,0 +1,20 @@
+{
+    "333": {
+        "points": 3,
+        "played": 4,
+        "won": 3,
+        "champs": 0
+    },
+    "111": {
+        "points": 6,
+        "played": 3,
+        "won": 3,
+        "champs": 1
+    },
+    "222": {
+        "points": 6,
+        "played": 8,
+        "won": 6,
+        "champs": 0
+    }
+}
