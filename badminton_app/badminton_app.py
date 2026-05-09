@@ -8,7 +8,7 @@ from datetime import datetime
 st.set_page_config(page_title="王者轮回羽毛球赛", page_icon="🏸", layout="centered")
 
 PEAK_FILE = "peak_standings.json"
-AVATAR_DIR = "avatars"
+AVATAR_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "avatars")
 
 if not os.path.exists(AVATAR_DIR):
     os.makedirs(AVATAR_DIR)
