@@ -48,12 +48,12 @@ def inject_global_css():
     </style>
     """, unsafe_allow_html=True)
 
-def inject_landscape_prompt():
+def inject_portrait_prompt():
     st.markdown("""
     <style>
-        @media screen and (max-width: 800px) and (orientation: portrait) {
+        @media screen and (max-width: 800px) and (orientation: landscape) {
             body::before {
-                content: "🔄 比赛计分中，请旋转手机至横屏";
+                content: "🔄 比赛计分中，请旋转手机至竖屏";
                 position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
                 background: rgba(0,0,0,0.95); color: white; z-index: 10000;
                 display: flex; align-items: center; justify-content: center;
@@ -203,7 +203,7 @@ elif st.session_state.stage == 'profile':
 # ================= 正式系统界面 =================
 else:
     if st.session_state.stage in ['playing', 'tb_playing']:
-        inject_landscape_prompt()
+        inject_portrait_prompt()  # ← 竖屏提示（横屏时弹出遮罩）
 
     if st.session_state.stage not in ['playing', 'tb_playing']:
         st.markdown("<h2 style='text-align: center; margin-bottom: 0;'>🏸 轮回羽毛球赛</h2>", unsafe_allow_html=True)
@@ -291,7 +291,7 @@ else:
             with st.container(border=True):
                 for match in st.session_state.matches:
                     st.markdown(f"**{match['desc']}**: {match['p1']} VS {match['p2']}")
-            if st.button("🚀 开始比赛 (请横屏手机)", type="primary", use_container_width=True):
+            if st.button("🚀 开始比赛", type="primary", use_container_width=True):  # ← 去掉"请横屏手机"
                 reset_match_state()
                 st.session_state.stage = 'playing'
                 st.rerun()
@@ -377,7 +377,7 @@ else:
                 format_type = st.radio("赛制", ["1局定胜负", "3局2胜"], horizontal=True)
                 target = st.select_slider("目标分数", options=[1,3,5,7,11] if format_type=="1局定胜负" else [15,21], value=11 if format_type=="1局定胜负" else 15)
                 
-                if st.button("🚀 开始本场加赛 (横屏)", type="primary", use_container_width=True):
+                if st.button("🚀 开始本场加赛", type="primary", use_container_width=True):  # ← 去掉"横屏"
                     if p1 == p2: st.error("不能自己打自己！")
                     else:
                         st.session_state.tb_config = {"p1": p1, "p2": p2, "format": 1 if format_type=="1局定胜负" else 3, "target": target}
